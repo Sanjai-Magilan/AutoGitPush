@@ -18,7 +18,7 @@ while true; do
         fi
         
     else
-        echo "VS Code not running, waiting..."
+        echo "VS Code not running, waiting...."
     fi
     sleep 10 
 done
