@@ -7,9 +7,15 @@ while true; do
     if pgrep -f "code" > /dev/null; then
 
         cd "$REPO_PATH" || exit
-        git add .
-        git commit -m "$COMMIT_MESSAGE"
-        git push origin main  # Change 'main' to your branch name if needed
+        if git diff --quiet; then
+            echo "No changes to commit"
+        else
+            git add .
+            git commit -m "$COMMIT_MESSAGE"
+            git push origin main  # Change 'main' to your branch name if needed
+        fi
+
+        
         echo "Changes pushed at $(date)"
     else
         echo "VS Code not running, waiting..."
