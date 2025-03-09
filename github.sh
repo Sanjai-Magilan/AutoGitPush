@@ -8,13 +8,13 @@ while true; do
 
         cd "$REPO_PATH" || exit
         
-        if git diff --quiet; then
-            echo "No changes to commit"
-        else
-            git add .
+        if git status --porcelain | grep -q .; then
+            git add -A 
             git commit -m "$COMMIT_MESSAGE"
             git push origin main  # Change 'main' to your branch name if needed
             echo "Changes pushed at $(date)"       
+        else
+            echo "No changes to commit"
         fi
         
     else
