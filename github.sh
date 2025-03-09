@@ -13,10 +13,9 @@ while true; do
             git add .
             git commit -m "$COMMIT_MESSAGE"
             git push origin main  # Change 'main' to your branch name if needed
+            echo "Changes pushed at $(date)"       
         fi
-
         
-        echo "Changes pushed at $(date)"
     else
         echo "VS Code not running, waiting..."
     fi
