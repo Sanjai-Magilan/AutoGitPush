@@ -1,1 +1,1 @@
-print("fuck")
+print("p")
