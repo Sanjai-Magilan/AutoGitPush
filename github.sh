@@ -4,7 +4,8 @@ REPO_PATH="/home/zerotwo/Public/codings/"  # Change this to your GitHub repo pat
 COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
 
 while true; do
-    if pgrep -x "code" > /dev/null; then
+    if pgrep -f "code" > /dev/null; then
+
         cd "$REPO_PATH" || exit
         git add .
         git commit -m "$COMMIT_MESSAGE"
@@ -13,5 +14,5 @@ while true; do
     else
         echo "VS Code not running, waiting..."
     fi
-    sleep 1800  
+    sleep 10 
 done
