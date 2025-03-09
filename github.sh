@@ -7,6 +7,7 @@ while true; do
     if pgrep -f "code" > /dev/null; then
 
         cd "$REPO_PATH" || exit
+        
         if git diff --quiet; then
             echo "No changes to commit"
         else
