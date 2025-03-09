@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="/home/zerotwo/Public/codings/"  # Change this to your GitHub repo path
+REPO_PATH="/home/zerotwo/Public/codings/"  
 COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
 
 while true; do
@@ -11,7 +11,7 @@ while true; do
         if git status --porcelain | grep -q .; then
             git add -A 
             git commit -m "$COMMIT_MESSAGE"
-            git push origin main  # Change 'main' to your branch name if needed
+            git push origin main  
             echo "Changes pushed at $(date)"       
         else
             echo "No changes to commit"
