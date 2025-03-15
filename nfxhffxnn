@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Weapons Management System</title>
+</head>
+<body>
+    <h1>Army Weapons Management System</h1>
+    <form id="weaponForm">
+        <label for="weaponName">Weapon Name:</label>
+        <input type="text" id="weaponName" name="weaponName" required>
+        <label for="weaponType">Weapon Type:</label>
+        <input type="text" id="weaponType" name="weaponType" required>
+        <button type="submit">Add Weapon</button>
+    </form>
+    <script>
+        document.getElementById('weaponForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const weaponName = document.getElementById('weaponName').value;
+            const weaponType = document.getElementById('weaponType').value;
+
+            const response = await fetch('/api/weapons', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ weaponName, weaponType })
+            });
+
+            if (response.ok) {
+                alert('Weapon added successfully!');
+            } else {
+                alert('Failed to add weapon.');
+            }
+        });
+    </script>
+</body>
+</html>
