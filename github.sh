@@ -20,5 +20,5 @@ while true; do
     else
         echo "VS Code not running, waiting..."
     fi
-    sleep 10 
+    sleep 1800
 done
