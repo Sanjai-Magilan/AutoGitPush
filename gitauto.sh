@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="your/gitrepo/path/"  
+REPO_PATH="your/git/repo/path/"  
 COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
 
 while true; do
