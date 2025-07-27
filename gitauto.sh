@@ -1,7 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="/home/zerotwo/Public/weapons
-/"  
+REPO_PATH="your/gitrepo/path/"  
 COMMIT_MESSAGE="Auto-commit: $(date +'%Y-%m-%d %H:%M:%S')"
 
 while true; do
