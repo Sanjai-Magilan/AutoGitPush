@@ -7,7 +7,7 @@
 # ================================
 
 # Path to your local Git repository
-$REPO_PATH = "C:"
+$REPO_PATH = "C:path\to\your\repo"
 
 # Infinite loop to continuously monitor VS Code
 while ($true) {
