@@ -28,6 +28,12 @@ We welcome all contributions — from fixing typos to adding major features.
 6. Create a **Pull Request** from your branch to `main` in this repository.
 
 ---
+## 🚫 Trash Branch Rules
+- All testing must be done in the `trash` branch.
+- Never merge the `trash` branch into `main` or any other branch.
+- After testing, reset your branch to remove trash commits before merging into your feature branch.
+- Any pull request from `trash` to `main` will be closed without review.
+---
 
 ## 🏷 Labels for Issues
 - `good first issue` — Beginner-friendly tasks.
