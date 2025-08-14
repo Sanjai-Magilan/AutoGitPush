@@ -7,7 +7,7 @@
 # ================================
 
 # Path to your local Git repository
-$REPO_PATH = "S:\AUTOGITPUSH"
+$REPO_PATH = "C:"
 
 # Infinite loop to continuously monitor VS Code
 while ($true) {
