@@ -19,5 +19,5 @@ while ($true) {
         Write-Output "VS Code not running, waiting..."
     }
     
-    Start-Sleep -Seconds 18
+    Start-Sleep -Seconds 10
 }
