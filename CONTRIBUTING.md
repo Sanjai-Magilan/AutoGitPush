@@ -43,8 +43,3 @@ We welcome all contributions — from fixing typos to adding major features.
 - Test your code before submitting.
 
 ---
-
-## 🛡 Code of Conduct
-By contributing, you agree to follow our Code of Conduct (if added later).
-
----
