@@ -34,12 +34,12 @@ cd AutoGitPush\src
 
 ### Linux / macOS
 ```bash
-./autogitpush.sh
+./gitautoB.sh
 ```
 
 ### Windows (PowerShell)
 ```powershell
-.\autogitpush.ps1
+.\gitautoP.ps1
 ```
 
 ---
