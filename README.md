@@ -65,6 +65,7 @@ AutoGitPush/
 │── examples/             # Example screenshots
 │── README.md
 │── LICENSE
+|── CODE_OF_CONDUCT.md
 │── CONTRIBUTING.md
 │── CHANGELOG.md
 ```
