@@ -8,10 +8,10 @@
 # ================================
 
 # === CONFIGURATION ===
-REPO_PATH="$HOME/Public/AutoGitPush"   # Path to your local Git repository
+REPO_PATH="$HOME/path/to/your/repo"   # Path to your local Git repository
 BRANCH_NAME="main"                    # Branch to push changes to
 COMMIT_MESSAGE_PREFIX="Auto-commit"   # Prefix for commit messages
-CHECK_INTERVAL=5                   # Time between checks (in seconds) — default is 30 minutes
+CHECK_INTERVAL=1800                   # Time between checks (in seconds) — default is 30 minutes
 
 # === SCRIPT START ===
 while true; do
