@@ -19,13 +19,14 @@ AutoGitPush is a lightweight automation tool that commits and pushes your change
 ```bash
 git clone https://github.com/Sanjai-Magilan/AutoGitPush.git
 cd AutoGitPush/src
-chmod +x autogitpush.sh
+chmod +x gitautoBh.sh
 ```
 
 ### Windows (PowerShell)
 ```powershell
 git clone https://github.com/Sanjai-Magilan/AutoGitPush.git
 cd AutoGitPush\src
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
 ---
