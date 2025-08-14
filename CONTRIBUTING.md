@@ -10,7 +10,7 @@ We welcome all contributions — from fixing typos to adding major features.
 1. **Fork** the repository to your own GitHub account.
 2. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/<your-username>/AutoGitPush.git
+   git clone https://github.com/Sanjai-Magilan/AutoGitPush.git
    ```
 3. **Create a branch** for your change:
    ```bash
