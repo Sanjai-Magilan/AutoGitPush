@@ -6,6 +6,11 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   welcome:
     runs-on: ubuntu-latest
@@ -15,10 +20,10 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            👋 Hi @${{ github.actor }}!  
-            Thanks for opening your first issue in **AutoGitPush** 🎉  
-            We’ll review it soon. In the meantime, please make sure you’ve read our [Contributing Guide](CONTRIBUTING.md).
+            👋 **Welcome to AutoGitPush, @${{ github.actor }}!** 🚀  
+            Thanks for opening your first issue! 🎉  
+            Please check out our [Contributing Guide](CONTRIBUTING.md).
+
           pr-message: |
-            👋 Hi @${{ github.actor }}!  
-            Thanks for your first pull request in **AutoGitPush** 🚀  
-            We appreciate your contribution! Please ensure your PR follows our [Contributing Guide](CONTRIBUTING.md).
+            🎉 **Welcome aboard, @${{ github.actor }}!** 🚀  
+            Thanks for your first pull request! Please ensure your PR follows our [Contributing Guide](CONTRIBUTING.md).
