@@ -1,0 +1,54 @@
+# ================================
+# AutoGitPush Configuration Template
+# ================================
+# Copy this file to 'autogitpush.conf' and edit according to your needs
+
+# Path to your local Git repository
+# Linux/macOS example: REPO_PATH="$HOME/myproject"
+# Windows example: REPO_PATH="C:\Users\YourName\Documents\myproject"
+REPO_PATH="$HOME/path/to/your/repo"
+
+# Branch to push changes to
+BRANCH_NAME="main"
+
+# Prefix for commit messages
+COMMIT_MESSAGE_PREFIX="Auto-commit"
+
+# Time between checks - Choose ONE unit and uncomment it
+# Uncomment the line with your preferred time unit and comment out others
+
+# === SECONDS ===
+CHECK_INTERVAL=1800  # 30 minutes in seconds
+
+# === MINUTES ===
+# CHECK_INTERVAL_MINUTES=30  # 30 minutes
+
+# === HOURS ===
+# CHECK_INTERVAL_HOURS=0.5   # 0.5 hours (30 minutes)
+
+# === DAYS ===
+# CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes)
+
+# ================================
+# Time Unit Examples:
+# ================================
+# 
+# Seconds:
+#   CHECK_INTERVAL=600     # 10 minutes
+#   CHECK_INTERVAL=1800    # 30 minutes
+#   CHECK_INTERVAL=3600    # 1 hour
+#
+# Minutes:
+#   CHECK_INTERVAL_MINUTES=10   # 10 minutes
+#   CHECK_INTERVAL_MINUTES=30   # 30 minutes  
+#   CHECK_INTERVAL_MINUTES=60   # 1 hour
+#
+# Hours:
+#   CHECK_INTERVAL_HOURS=0.5    # 30 minutes
+#   CHECK_INTERVAL_HOURS=1      # 1 hour
+#   CHECK_INTERVAL_HOURS=2      # 2 hours
+#
+# Days:
+#   CHECK_INTERVAL_DAYS=0.02    # ~30 minutes
+#   CHECK_INTERVAL_DAYS=0.04    # ~1 hour
+#   CHECK_INTERVAL_DAYS=0.5     # 12 hours
