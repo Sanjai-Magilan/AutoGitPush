@@ -49,3 +49,4 @@ while ($true) {
     # Wait 30 minutes before checking again
     Start-Sleep -Seconds 1800
 }
+ 
