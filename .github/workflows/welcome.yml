@@ -7,6 +7,7 @@ on:
     types: [opened]
 
 permissions:
+  contents: write
   pull-requests: write
   issues: write
 
@@ -14,25 +15,15 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-      - name: Welcome first-time contributors
-        uses: peter-evans/first-interaction@v1
+      - name: Send welcome message
+        uses: actions/first-interaction@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
             👋 **Welcome to AutoGitPush, @${{ github.actor }}!** 🚀  
             Thanks for opening your first issue! 🎉  
-            We’re happy to have you here.  
-            Please check out our [Contributing Guide](CONTRIBUTING.md) and remember:
-            - 💬 Be respectful & constructive
-            - 📝 Add clear descriptions
-            - 📷 Screenshots/logs help a lot
-            Let’s make Git automation awesome together! 😄
+            Please check out our [Contributing Guide](CONTRIBUTING.md).
 
           pr-message: |
             🎉 **Welcome aboard, @${{ github.actor }}!** 🚀  
-            This is your first pull request to **AutoGitPush** — exciting! 😎  
-            Here’s a quick checklist before we review:
-            - ✅ Follow [Contributing Guide](CONTRIBUTING.md)
-            - 🧹 Keep commits clean (no `trash` branch merges!)
-            - 📦 Test your changes before pushing
-            Thanks for contributing to making Git automation smarter! 🔥
+            Thanks for your first pull request! Please ensure your PR follows our [Contributing Guide](CONTRIBUTING.md).
