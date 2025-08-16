@@ -1,4 +1,4 @@
-﻿# ================================
+# ================================
 # AutoGitPush Configuration File
 # ================================
 # Edit these values according to your needs
@@ -10,19 +10,19 @@ REPO_PATH="C:\Users\sarav\projects\AutoGitPush"
 BRANCH_NAME="trash"
 
 # Prefix for commit messages
-COMMIT_MESSAGE_PREFIX="testing the auto commit"
+COMMIT_MESSAGE_PREFIX="Auto-commit"
 
 # Time between checks - Choose ONE unit and uncomment it
 # Uncomment the line with your preferred time unit and comment out others
 
 # === SECONDS ===
-#CHECK_INTERVAL=1800  # 30 minutes in seconds
-
+CHECK_INTERVAL=30  
+#this is a change
 # === MINUTES ===
-CHECK_INTERVAL_MINUTES= 0.1667  # 30 minutes
+# CHECK_INTERVAL_MINUTES=30  # 30 minutes
 
 # === HOURS ===
 # CHECK_INTERVAL_HOURS=0.5   # 0.5 hours (30 minutes)
 
 # === DAYS ===
-# CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes)
+# CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes) testing the changes whether it is working or not
