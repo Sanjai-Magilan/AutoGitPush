@@ -144,7 +144,7 @@ while ($true) {
 
             # Create a commit message with the current date and time
             $TIMESTAMP = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-            $COMMIT_MESSAGE = "$COMMIT_MESSAGE_PREFIX`: $TIMESTAMP"
+            $COMMIT_MESSAGE = "$COMMIT_MESSAGE_PREFIX: $TIMESTAMP"
 
             Write-Output "📦 Changes detected. Committing..."
 
