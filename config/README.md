@@ -104,7 +104,3 @@ The script will validate your configuration and show:
 - Ensure the `REPO_PATH` points to a valid Git repository
 - Use absolute paths for better reliability
 - Check that the directory exists and contains a `.git` folder
-
-### Permission Issues
-- Ensure the script has read permissions for the config file
-- On Linux/macOS, you might need: `chmod +r config/autogitpush.conf`
