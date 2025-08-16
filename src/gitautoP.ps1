@@ -7,12 +7,6 @@
 
 # === CONFIGURATION LOADER ===
 # Get the directory where the script is located
-
-# ================================
-# AutoGitPush PowerShell Script (Bash logic)
-# ================================
-
-# Get the directory where the script is located
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
 $CONFIG_FILE = Join-Path $SCRIPT_DIR "..\config\autogitpush.conf"
 
@@ -53,8 +47,8 @@ CHECK_INTERVAL=1800  # 30 minutes in seconds
 # CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes)
 "@
     Set-Content -Path $CONFIG_FILE -Value $configContent -Encoding UTF8
-    Write-Host "[Config] Created default configuration file at: $CONFIG_FILE"
-    Write-Host "[Config] Please edit the configuration file before running the script."
+    Write-Host "📋 Created default configuration file at: $CONFIG_FILE"
+    Write-Host "✏️  Please edit the configuration file before running the script."
 }
 
 # Function to parse configuration file
@@ -86,26 +80,26 @@ function Convert-ToSeconds {
     if ($config.ContainsKey('CHECK_INTERVAL_MINUTES')) {
         $minutes = [double]$config['CHECK_INTERVAL_MINUTES']
         $interval = [Math]::Round($minutes * 60)
-        Write-Host "[Interval] Using interval: $minutes minutes ($interval seconds)"
+        Write-Host "⏱️  Using interval: $minutes minutes ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_HOURS')) {
         $hours = [double]$config['CHECK_INTERVAL_HOURS']
         $interval = [Math]::Round($hours * 3600)
-        Write-Host "[Interval] Using interval: $hours hours ($interval seconds)"
+        Write-Host "⏱️  Using interval: $hours hours ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_DAYS')) {
         $days = [double]$config['CHECK_INTERVAL_DAYS']
         $interval = [Math]::Round($days * 86400)
-        Write-Host "[Interval] Using interval: $days days ($interval seconds)"
+        Write-Host "⏱️  Using interval: $days days ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL')) {
         $interval = [int]$config['CHECK_INTERVAL']
-        Write-Host "[Interval] Using interval: $interval seconds"
+        Write-Host "⏱️  Using interval: $interval seconds"
     } else {
         $interval = 1800  # Default 30 minutes
-        Write-Host "[Interval] No interval configured, using default: 1800 seconds (30 minutes)"
+        Write-Host "⚠️  No interval configured, using default: 1800 seconds (30 minutes)"
     }
     
     # Minimum interval validation - enforce at least 30 seconds
     if ($interval -lt 30) {
-        Write-Host "[Warning] Configured interval ($interval seconds) is less than minimum (30 seconds). Using 30 seconds instead."
+        Write-Host "⚠️  Configured interval ($interval seconds) is less than minimum (30 seconds). Using 30 seconds instead."
         $interval = 30
     }
     
@@ -114,15 +108,15 @@ function Convert-ToSeconds {
 
 # Check if configuration file exists, if not create it
 if (-not (Test-Path $CONFIG_FILE)) {
-    Write-Output "[Config] Configuration file not found. Creating default configuration..."
+    Write-Host "⚙️  Configuration file not found. Creating default configuration..."
     Create-DefaultConfig
-    Write-Output ""
-    Write-Output "[Config] Please edit $CONFIG_FILE with your settings and run the script again."
+    Write-Host ""
+    Write-Host "🛑 Please edit $CONFIG_FILE with your settings and run the script again."
     exit 1
 }
 
 # Load configuration from file
-Write-Output "[Config] Loading configuration from: $CONFIG_FILE"
+Write-Host "📖 Loading configuration from: $CONFIG_FILE"
 $config = Parse-Config
 
 # Extract configuration variables
@@ -133,16 +127,16 @@ $CHECK_INTERVAL = Convert-ToSeconds -config $config
 
 # Validate required configuration
 if ($REPO_PATH -like "*path\\to\\your\\repo*" -or $REPO_PATH -like "*path/to/your/repo*" -or $REPO_PATH -like "*C:\\path\\to\\your\\repo*") {
-    Write-Output "[Config] Please configure REPO_PATH in $CONFIG_FILE"
+    Write-Host "❌ Please configure REPO_PATH in $CONFIG_FILE"
     exit 1
 }
 
-Write-Output "[Config] Configuration loaded:"
-Write-Output "   Repository: $REPO_PATH"
-Write-Output "   Branch: $BRANCH_NAME"
-Write-Output "   Commit Prefix: $COMMIT_MESSAGE_PREFIX"
-Write-Output "   Check Interval: $CHECK_INTERVAL seconds"
-Write-Output ""
+Write-Host "🔧 Configuration loaded:"
+Write-Host "   Repository: $REPO_PATH"
+Write-Host "   Branch: $BRANCH_NAME"
+Write-Host "   Commit Prefix: $COMMIT_MESSAGE_PREFIX"
+Write-Host "   Check Interval: $CHECK_INTERVAL seconds"
+Write-Host ""
 
 # === SCRIPT START ===
 while ($true) {
@@ -151,7 +145,7 @@ while ($true) {
     if ($vscodeRunning) {
         # Change directory to the repository
         if (-not (Test-Path $REPO_PATH)) {
-            Write-Output "[Error] Repo path not found: $REPO_PATH"
+            Write-Host "❌ Repo path not found: $REPO_PATH"
             exit 1
         }
         Set-Location -Path $REPO_PATH
@@ -163,7 +157,7 @@ while ($true) {
             $TIMESTAMP = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
             $COMMIT_MESSAGE = "${COMMIT_MESSAGE_PREFIX}: $TIMESTAMP"
 
-            Write-Output "[Git] Changes detected. Committing..."
+            Write-Host "📦 Changes detected. Committing..."
 
             # Stage all changes (new, modified, deleted files)
             git add -A
@@ -174,14 +168,14 @@ while ($true) {
             # Push to the specified branch
             git push origin "$BRANCH_NAME"
 
-            Write-Output "[Git] Pushed to $BRANCH_NAME at $TIMESTAMP"
+            Write-Host "✅ Pushed to $BRANCH_NAME at $TIMESTAMP"
         } else {
             # No changes detected
-            Write-Output "[Git] No changes to commit."
+            Write-Host "🔍 No changes to commit."
         }
     } else {
         # VS Code not running
-        Write-Output "[Info] VS Code not running. Skipping..."
+        Write-Host "💤 VS Code not running. Skipping..."
     }
     # Wait for the defined interval before checking again
     Start-Sleep -Seconds $CHECK_INTERVAL
