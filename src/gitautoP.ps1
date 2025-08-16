@@ -53,8 +53,8 @@ CHECK_INTERVAL=1800  # 30 minutes in seconds
 # CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes)
 "@
     Set-Content -Path $CONFIG_FILE -Value $configContent -Encoding UTF8
-    Write-Output "[Config] Created default configuration file at: $CONFIG_FILE"
-    Write-Output "[Config] Please edit the configuration file before running the script."
+    Write-Host "[Config] Created default configuration file at: $CONFIG_FILE"
+    Write-Host "[Config] Please edit the configuration file before running the script."
 }
 
 # Function to parse configuration file
@@ -84,19 +84,19 @@ function Convert-ToSeconds {
     $interval = 0
     if ($config.ContainsKey('CHECK_INTERVAL_MINUTES')) {
         $interval = [int]$config['CHECK_INTERVAL_MINUTES'] * 60
-        Write-Output "[Interval] Using interval: $($config['CHECK_INTERVAL_MINUTES']) minutes ($interval seconds)"
+        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_MINUTES']) minutes ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_HOURS')) {
         $interval = [int]([double]$config['CHECK_INTERVAL_HOURS'] * 3600)
-        Write-Output "[Interval] Using interval: $($config['CHECK_INTERVAL_HOURS']) hours ($interval seconds)"
+        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_HOURS']) hours ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_DAYS')) {
         $interval = [int]([double]$config['CHECK_INTERVAL_DAYS'] * 86400)
-        Write-Output "[Interval] Using interval: $($config['CHECK_INTERVAL_DAYS']) days ($interval seconds)"
+        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_DAYS']) days ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL')) {
         $interval = [int]$config['CHECK_INTERVAL']
-        Write-Output "[Interval] Using interval: $($config['CHECK_INTERVAL']) seconds"
+        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL']) seconds"
     } else {
         $interval = 1800  # Default 30 minutes
-        Write-Output "[Interval] No interval configured, using default: 1800 seconds (30 minutes)"
+        Write-Host "[Interval] No interval configured, using default: 1800 seconds (30 minutes)"
     }
     return $interval
 }
