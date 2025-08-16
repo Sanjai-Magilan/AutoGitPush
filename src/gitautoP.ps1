@@ -82,22 +82,33 @@ function Parse-Config {
 function Convert-ToSeconds {
     param($config)
     $interval = 0
+    
     if ($config.ContainsKey('CHECK_INTERVAL_MINUTES')) {
-        $interval = [int]$config['CHECK_INTERVAL_MINUTES'] * 60
-        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_MINUTES']) minutes ($interval seconds)"
+        $minutes = [double]$config['CHECK_INTERVAL_MINUTES']
+        $interval = [Math]::Round($minutes * 60)
+        Write-Host "[Interval] Using interval: $minutes minutes ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_HOURS')) {
-        $interval = [int]([double]$config['CHECK_INTERVAL_HOURS'] * 3600)
-        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_HOURS']) hours ($interval seconds)"
+        $hours = [double]$config['CHECK_INTERVAL_HOURS']
+        $interval = [Math]::Round($hours * 3600)
+        Write-Host "[Interval] Using interval: $hours hours ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL_DAYS')) {
-        $interval = [int]([double]$config['CHECK_INTERVAL_DAYS'] * 86400)
-        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL_DAYS']) days ($interval seconds)"
+        $days = [double]$config['CHECK_INTERVAL_DAYS']
+        $interval = [Math]::Round($days * 86400)
+        Write-Host "[Interval] Using interval: $days days ($interval seconds)"
     } elseif ($config.ContainsKey('CHECK_INTERVAL')) {
         $interval = [int]$config['CHECK_INTERVAL']
-        Write-Host "[Interval] Using interval: $($config['CHECK_INTERVAL']) seconds"
+        Write-Host "[Interval] Using interval: $interval seconds"
     } else {
         $interval = 1800  # Default 30 minutes
         Write-Host "[Interval] No interval configured, using default: 1800 seconds (30 minutes)"
     }
+    
+    # Minimum interval validation - enforce at least 30 seconds
+    if ($interval -lt 30) {
+        Write-Host "[Warning] Configured interval ($interval seconds) is less than minimum (30 seconds). Using 30 seconds instead."
+        $interval = 30
+    }
+    
     return $interval
 }
 
