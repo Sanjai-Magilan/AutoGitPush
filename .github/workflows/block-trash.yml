@@ -1,0 +1,17 @@
+name: Block Trash Branch Merges
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  block-trash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch
+        run: |
+          if [[ "${GITHUB_HEAD_REF}" == "trash" ]]; then
+            echo "❌ Merging from trash branch to main is not allowed."
+            exit 1
+          fi

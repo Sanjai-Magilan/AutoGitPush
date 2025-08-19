@@ -1,90 +1,24 @@
 # 🚀 AutoGitPush
 
-AutoGitPush is a lightweight automation tool that commits and pushes your changes to a GitHub repository at regular intervals — perfect for developers who want to save work continuously without manual `git add`, `git commit`, and `git push`.
+AutoGitPush is a lightweight automation tool that **commits and pushes your changes** to a GitHub repository at regular intervals — perfect for developers who want to save work continuously without manual `git add`, `git commit`, and `git push`.
 
 ---
 
 ## ✨ Features
 - ⏱ **Timed Commits** — Automatically commit changes every X minutes.
 - 🖥 **Cross-Platform** — Works on Linux, macOS, and Windows (via PowerShell).
-- 🔧 **Customizable** — Set commit messages and time intervals in seconds/minutes.
-- 💻 **Lightweight** — Pure Shell/PowerShell script, no dependencies.
-- 🛠 **CI/CD Friendly** — Integrates easily into DevOps workflows.
+- 🔧 **Customizable** — Configure commit messages & intervals via a config file.
+- 💻 **Lightweight** — Pure Shell/PowerShell scripts, no dependencies.
+- 🛠 **CI/CD Friendly** — Fits easily into DevOps workflows.
 
 ---
 
-## 📦 Installation
+## 📚 Documentation
+👉 Full guide in the [📖 AutoGitPush Wiki](../../wiki)
 
-### Linux / macOS
-```bash
-git clone https://github.com/Sanjai-Magilan/AutoGitPush.git
-cd AutoGitPush/src
-chmod +x gitautoBh.sh
-```
-
-### Windows (PowerShell)
-```powershell
-git clone https://github.com/Sanjai-Magilan/AutoGitPush.git
-cd AutoGitPush\src
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-
----
-
-## 🚀 Usage
-
-### Linux / macOS
-```bash
-./gitautoB.sh
-```
-
-### Windows (PowerShell)
-```powershell
-.\gitautoP.ps1
-```
-
----
-
-## ⚙️ Configuration
-You can edit the script variables to change:
-- Commit interval (in seconds or minutes)
-- Commit message template
-- Target repository path
-
-Example (inside `autogitpush.sh`):
-```bash
-INTERVAL=1800    # 30 minutes
-MESSAGE="Auto commit at $(date)"
-```
-
----
-
-## 📂 Project Structure
-```
-AutoGitPush/
-│── src/                  # Shell & PowerShell scripts
-│── examples/             # Example screenshots
-│── README.md
-│── LICENSE
-|── CODE_OF_CONDUCT.md
-│── CONTRIBUTING.md
-│── CHANGELOG.md
-```
-
----
-
-## 🛠 Contributing
-We welcome contributions!  
-Check the [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
-
----
-
-## 📜 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🌟 Star This Repo
-If you like this project, please **star** ⭐ it on GitHub — it really helps!
+- [Getting Started](../../wiki/GettingStarted)
+- [Configuration](../../wiki/Configuration)
+- [Troubleshooting](../../wiki/Troubleshooting)
+- [Contributing](../../wiki/Contributing)
 
 ---
