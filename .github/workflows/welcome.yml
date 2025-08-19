@@ -1,0 +1,29 @@
+name: Welcome New Contributors
+
+on:
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send welcome message
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            👋 **Welcome to AutoGitPush, @${{ github.actor }}!** 🚀  
+            Thanks for opening your first issue! 🎉  
+            Please check out our [Contributing Guide](CONTRIBUTING.md).
+
+          pr-message: |
+            🎉 **Welcome aboard, @${{ github.actor }}!** 🚀  
+            Thanks for your first pull request! Please ensure your PR follows our [Contributing Guide](CONTRIBUTING.md).
