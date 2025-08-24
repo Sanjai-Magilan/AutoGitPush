@@ -27,10 +27,16 @@ jobs:
           git commit -m "Initial commit"
           cd ..
 
+      - name: Debug file structure
+        run: |
+          echo "Working directory: $(pwd)"
+          ls -R
+          find . -type f -name "autogitpush.conf"
+
       - name: Update config file for dummy repo
         run: |
-            sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" AutoGitPush/config/autogitpush.conf
-            sed -i "s|^INTERVAL=.*|INTERVAL=5|" AutoGitPush/config/autogitpush.conf
+          sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" AutoGitPush/config/autogitpush.conf
+          sed -i "s|^INTERVAL=.*|INTERVAL=5|" AutoGitPush/config/autogitpush.conf
 
       - name: Modify dummy file every 3 sec in background
         run: |
