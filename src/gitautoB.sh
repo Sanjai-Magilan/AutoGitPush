@@ -111,9 +111,7 @@ echo ""
 
 # === SCRIPT START ===
 while true; do
-    # Check if VS Code is running by looking for "code" in the process list
-    if pgrep -f "code" > /dev/null; then
-        
+            
         # Change directory to the repository
         cd "$REPO_PATH" || {
             echo "❌ Repo path not found: $REPO_PATH"
@@ -146,6 +144,12 @@ while true; do
         # VS Code not running
         echo "💤 VS Code not running. Skipping..."
     fi
+
+        NOW=$(date +%s)
+        if (( NOW - LAST_COMMIT_TIME >= 10 )); then
+            echo "⏰ No changes detected for 30 minutes. Exiting..."
+            exit 0
+        fi
 
     # Wait for the defined interval before checking again
     sleep "$CHECK_INTERVAL"
