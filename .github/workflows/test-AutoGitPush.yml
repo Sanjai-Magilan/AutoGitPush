@@ -46,7 +46,7 @@ jobs:
 
       - name: Run AutoGitPush for 30 sec then kill
         run: |
-            SCRIPT=$(find . -type f -name "autogitpush.sh" | head -n 1)
+            SCRIPT=$(find . -type f -name "gitautoB.sh" | head -n 1)
             echo "Found script at: $SCRIPT"
             chmod +x "$SCRIPT"
             timeout 30s "$SCRIPT"
