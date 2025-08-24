@@ -140,14 +140,11 @@ while true; do
             # No changes detected
             echo "🔍 No changes to commit."
         fi
-    else
-        # VS Code not running
-        echo "💤 VS Code not running. Skipping..."
-    fi
+    
 
         NOW=$(date +%s)
-        if (( NOW - LAST_COMMIT_TIME >= 10 )); then
-            echo "⏰ No changes detected for 30 minutes. Exiting..."
+        if (( NOW - LAST_COMMIT_TIME >= 2700 )); then
+            echo "⏰ No changes detected for 45 minutes. Exiting..."
             exit 0
         fi
 
