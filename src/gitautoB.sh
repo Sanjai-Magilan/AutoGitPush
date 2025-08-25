@@ -110,6 +110,12 @@ echo "   Check Interval: $CHECK_INTERVAL seconds"
 echo ""
 
 # === SCRIPT START ===
+# Make sure repo is up to date before starting loop
+echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
+git pull origin "$BRANCH_NAME" || {
+    echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
+}
+
 while true; do
             
         # Change directory to the repository
