@@ -135,7 +135,7 @@ while true; do
             git commit -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
-            git push origin "$BRANCH_NAME"
+            git push origin "$BRANCH_NAME" 
 
             echo "✅ Pushed to $BRANCH_NAME at $TIMESTAMP"
         else
