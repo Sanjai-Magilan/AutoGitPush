@@ -112,7 +112,7 @@ echo ""
 # === SCRIPT START ===
 # Make sure repo is up to date before starting loop
 echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
-git pull origin "$BRANCH_NAME" || {
+git pull origin "$BRANCH_NAME" --no-rebase|| {
     echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
 }
 
