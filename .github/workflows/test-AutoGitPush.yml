@@ -1,0 +1,82 @@
+name: Test AutoGitPush
+
+on:
+  push:
+    branches: [ "SideBranch" ]   
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:              
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create dummy repo with a file
+        run: |
+          mkdir dummy-repo && cd dummy-repo
+          git init -b main
+          echo "Initial content" > file.txt
+          git add file.txt
+          git commit -m "Initial commit"
+          
+          # 👇 Use GITHUB_TOKEN for authentication
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+          git fetch origin
+
+          # Always work on trash branch
+          git checkout -B trash
+          git pull origin trash --rebase || true
+          git push -u origin trash
+
+          cd ..
+
+      - name: Update config file for dummy repo
+        run: |
+          CONFIG_FILE=$(find . -type f -name "autogitpush.conf" | head -n 1)
+          echo "Found config at: $CONFIG_FILE"
+          sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" "$CONFIG_FILE"
+          sed -i "s|^BRANCH_NAME=.*|BRANCH_NAME=trash|" "$CONFIG_FILE"
+          sed -i "s|^INTERVAL=.*|INTERVAL=5|" "$CONFIG_FILE"
+
+      - name: Modify dummy file every 3 sec in background
+        run: |
+          (
+            for i in {1..10}; do
+              echo "Update $i at $(date)" >> dummy-repo/file.txt
+              sleep 3
+            done
+          ) &
+
+      - name: Run AutoGitPush for 30 sec then kill
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SCRIPT=$(find . -type f -name "gitautoB.sh" | head -n 1)
+          echo "Found script at: $SCRIPT"
+          chmod +x "$SCRIPT"
+
+          set +e   # allow capturing exit code instead of failing immediately
+          timeout 30s "$SCRIPT"
+          EXIT_CODE=$?
+          set -e   # re-enable fail-on-error
+
+          if [ $EXIT_CODE -eq 124 ]; then
+            echo "⚠️ Script timed out (exit code 124) — ignoring."
+            exit 0
+          elif [ $EXIT_CODE -ne 0 ]; then
+            echo "❌ Script failed with exit code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
+
