@@ -141,7 +141,7 @@ while true; do
             git add -A
 
             # Commit the staged changes
-            git commit -m "$COMMIT_MESSAGE"
+            git commit -q -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
             git push -q origin "$BRANCH_NAME"
