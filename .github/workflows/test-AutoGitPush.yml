@@ -2,7 +2,7 @@ name: Test AutoGitPush
 
 on:
   push:
-    branches: [ "SideBranch" ]   
+    branches: [ "main" ]   
   pull_request:
     branches: [ "main" ]
 
