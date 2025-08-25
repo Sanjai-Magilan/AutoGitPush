@@ -110,19 +110,23 @@ echo "   Check Interval: $CHECK_INTERVAL seconds"
 echo ""
 
 # === SCRIPT START ===
-# Make sure repo is up to date before starting loop
-echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
-git pull origin "$BRANCH_NAME" --no-rebase|| {
-    echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
-}
-LAST_COMMIT_TIME=$(date +%s)
-while true; do
-            
-        # Change directory to the repository
+
+# Change directory to the repository
         cd "$REPO_PATH" || {
             echo "❌ Repo path not found: $REPO_PATH"
             exit 1
         }
+# Make sure repo is up to date before starting loop
+        
+echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
+git pull origin "$BRANCH_NAME" --no-rebase|| {
+    echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
+}
+
+LAST_COMMIT_TIME=$(date +%s)
+
+while true; do
+            
 
         # Check if there are any uncommitted changes
         if git status --porcelain | grep -q .; then
