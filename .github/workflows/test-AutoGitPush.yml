@@ -2,7 +2,7 @@ name: Test AutoGitPush
 
 on:
   push:
-    branches: [ "SideBranch" ]
+    branches: [ "trash" ]   # 👈 Trigger on trash branch
   pull_request:
     branches: [ "main" ]
 
@@ -35,8 +35,10 @@ jobs:
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
           git fetch origin
 
-          git checkout -b SideBranch || git checkout SideBranch
-          git push -u origin SideBranch
+          # Always work on trash branch
+          git checkout -B trash
+          git pull origin trash --rebase || true
+          git push -u origin trash
 
           cd ..
 
@@ -45,6 +47,7 @@ jobs:
           CONFIG_FILE=$(find . -type f -name "autogitpush.conf" | head -n 1)
           echo "Found config at: $CONFIG_FILE"
           sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" "$CONFIG_FILE"
+          sed -i "s|^BRANCH_NAME=.*|BRANCH_NAME=trash|" "$CONFIG_FILE"
           sed -i "s|^INTERVAL=.*|INTERVAL=5|" "$CONFIG_FILE"
 
       - name: Modify dummy file every 3 sec in background
