@@ -119,7 +119,7 @@ echo ""
 # Make sure repo is up to date before starting loop
         
 echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
-git pull origin "$BRANCH_NAME" --no-rebase|| {
+git pull -q origin "$BRANCH_NAME" --no-rebase|| {
     echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
 }
 
@@ -144,7 +144,7 @@ while true; do
             git commit -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
-            git push origin "$BRANCH_NAME"
+            git push -q origin "$BRANCH_NAME"
 
             echo "✅ Pushed to $BRANCH_NAME at $TIMESTAMP"
         else
