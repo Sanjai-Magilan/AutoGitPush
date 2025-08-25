@@ -9,9 +9,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:               # 👈 REQUIRED for push access
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}   # 👈 use the built-in token
 
       - name: Set up Git
         run: |
@@ -25,8 +30,9 @@ jobs:
           echo "Initial content" > file.txt
           git add file.txt
           git commit -m "Initial commit"
-        
-          git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
+          
+          # 👇 Use GITHUB_TOKEN for authentication
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
           git fetch origin
 
           git checkout -b SideBranch || git checkout SideBranch
@@ -36,11 +42,10 @@ jobs:
 
       - name: Update config file for dummy repo
         run: |
-            CONFIG_FILE=$(find . -type f -name "autogitpush.conf" | head -n 1)
-            echo "Found config at: $CONFIG_FILE"
-            sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" "$CONFIG_FILE"
-            sed -i "s|^INTERVAL=.*|INTERVAL=5|" "$CONFIG_FILE"
-
+          CONFIG_FILE=$(find . -type f -name "autogitpush.conf" | head -n 1)
+          echo "Found config at: $CONFIG_FILE"
+          sed -i "s|^REPO_PATH=.*|REPO_PATH=./dummy-repo|" "$CONFIG_FILE"
+          sed -i "s|^INTERVAL=.*|INTERVAL=5|" "$CONFIG_FILE"
 
       - name: Modify dummy file every 3 sec in background
         run: |
@@ -52,9 +57,10 @@ jobs:
           ) &
 
       - name: Run AutoGitPush for 30 sec then kill
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # 👈 make token available to script if needed
         run: |
-            SCRIPT=$(find . -type f -name "gitautoB.sh" | head -n 1)
-            echo "Found script at: $SCRIPT"
-            chmod +x "$SCRIPT"
-            timeout 30s "$SCRIPT"
-
+          SCRIPT=$(find . -type f -name "gitautoB.sh" | head -n 1)
+          echo "Found script at: $SCRIPT"
+          chmod +x "$SCRIPT"
+          timeout 30s "$SCRIPT"
