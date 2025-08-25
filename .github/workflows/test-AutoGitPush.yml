@@ -2,7 +2,7 @@ name: Test AutoGitPush
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "SideBranch" ]
   pull_request:
     branches: [ "main" ]
 
@@ -25,6 +25,13 @@ jobs:
           echo "Initial content" > file.txt
           git add file.txt
           git commit -m "Initial commit"
+        
+          git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
+          git fetch origin
+
+          git checkout -b SideBranch || git checkout SideBranch
+          git push -u origin SideBranch
+
           cd ..
 
       - name: Update config file for dummy repo
