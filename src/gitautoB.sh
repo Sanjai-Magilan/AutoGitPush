@@ -115,7 +115,7 @@ echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
 git pull origin "$BRANCH_NAME" --no-rebase|| {
     echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
 }
-
+LAST_COMMIT_TIME=0
 while true; do
             
         # Change directory to the repository
@@ -129,6 +129,7 @@ while true; do
             # Create a commit message with current date and time
             TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
             COMMIT_MESSAGE="$COMMIT_MESSAGE_PREFIX: $TIMESTAMP"
+            LAST_COMMIT_TIME=$(date +%s)
 
             echo "📦 Changes detected. Committing..."
 
