@@ -9,7 +9,7 @@
 # Get the directory where the script is located
 
 # ================================
-# AutoGitPush PowerShell Script (Bash logic)
+# AutoGitPush PowerShell Script 
 # ================================
 
 # Get the directory where the script is located
