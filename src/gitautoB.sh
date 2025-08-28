@@ -110,21 +110,30 @@ echo "   Check Interval: $CHECK_INTERVAL seconds"
 echo ""
 
 # === SCRIPT START ===
-while true; do
-    # Check if VS Code is running by looking for "code" in the process list
-    if pgrep -f "code" > /dev/null; then
-        
-        # Change directory to the repository
+
+# Change directory to the repository
         cd "$REPO_PATH" || {
             echo "❌ Repo path not found: $REPO_PATH"
             exit 1
         }
+# Make sure repo is up to date before starting loop
+        
+echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
+git pull -q origin "$BRANCH_NAME" --no-rebase|| {
+    echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
+}
+
+LAST_COMMIT_TIME=$(date +%s)
+
+while true; do
+            
 
         # Check if there are any uncommitted changes
         if git status --porcelain | grep -q .; then
             # Create a commit message with current date and time
             TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
             COMMIT_MESSAGE="$COMMIT_MESSAGE_PREFIX: $TIMESTAMP"
+            LAST_COMMIT_TIME=$(date +%s)
 
             echo "📦 Changes detected. Committing..."
 
@@ -132,20 +141,23 @@ while true; do
             git add -A
 
             # Commit the staged changes
-            git commit -m "$COMMIT_MESSAGE"
+            git commit -q -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
-            git push origin "$BRANCH_NAME"
+            git push -q origin "$BRANCH_NAME"
 
             echo "✅ Pushed to $BRANCH_NAME at $TIMESTAMP"
         else
             # No changes detected
             echo "🔍 No changes to commit."
         fi
-    else
-        # VS Code not running
-        echo "💤 VS Code not running. Skipping..."
-    fi
+    
+
+        NOW=$(date +%s)
+        if (( NOW - LAST_COMMIT_TIME >= 2700 )); then
+            echo "⏰ No changes detected for 45 minutes. Exiting..."
+            exit 0
+        fi
 
     # Wait for the defined interval before checking again
     sleep "$CHECK_INTERVAL"

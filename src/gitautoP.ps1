@@ -146,14 +146,6 @@ Write-Output ""
 
 # === SCRIPT START ===
 while ($true) {
-    # Check if VS Code is running by looking for "Code" in the process list
-    $vscodeRunning = Get-Process | Where-Object { $_.ProcessName -like "Code*" }
-    if ($vscodeRunning) {
-        # Change directory to the repository
-        if (-not (Test-Path $REPO_PATH)) {
-            Write-Output "[Error] Repo path not found: $REPO_PATH"
-            exit 1
-        }
         Set-Location -Path $REPO_PATH
 
         # Check if there are any uncommitted changes
@@ -166,23 +158,19 @@ while ($true) {
             Write-Output "[Git] Changes detected. Committing..."
 
             # Stage all changes (new, modified, deleted files)
-            git add -A
+            git add -q -A
 
             # Commit the staged changes
-            git commit -m "$COMMIT_MESSAGE"
+            git commit -q -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
-            git push origin "$BRANCH_NAME"
+            git push -q origin "$BRANCH_NAME"
 
             Write-Output "[Git] Pushed to $BRANCH_NAME at $TIMESTAMP"
         } else {
             # No changes detected
             Write-Output "[Git] No changes to commit."
         }
-    } else {
-        # VS Code not running
-        Write-Output "[Info] VS Code not running. Skipping..."
-    }
     # Wait for the defined interval before checking again
     Start-Sleep -Seconds $CHECK_INTERVAL
 }
