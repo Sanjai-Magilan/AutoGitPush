@@ -9,11 +9,11 @@ The configuration file is automatically created at:
 
 ### Required Settings
 
-| Setting | Description | Example |
-|---------|-------------|---------|
-| `REPO_PATH` | Path to your Git repository | `"$HOME/myproject"` (Linux/macOS)<br>`"C:\Users\Name\myproject"` (Windows) |
-| `BRANCH_NAME` | Git branch to push to | `"main"`, `"develop"`, `"feature-branch"` |
-| `COMMIT_MESSAGE_PREFIX` | Prefix for auto-commit messages | `"Auto-commit"`, `"WIP"`, `"Save"` |
+| Setting                 | Description                     | Example                                                                    |
+|-------------------------|---------------------------------|----------------------------------------------------------------------------|
+| `REPO_PATH`             | Path to your Git repository     | `"$HOME/myproject"` (Linux/macOS)<br>`"C:\Users\Name\myproject"` (Windows) |
+| `BRANCH_NAME`           | Git branch to push to           | `"main"`, `"develop"`, `"feature-branch"`                                  |
+| `COMMIT_MESSAGE_PREFIX` | Prefix for auto-commit messages | `"Auto-commit"`, `"WIP"`, `"Save"`                                         |
 
 ### Time Interval Settings
 
