@@ -1,17 +1,4 @@
-# ================================
-# AutoGitPush PowerShell Script
-# -------------------------------
-# This script automatically commits and pushes changes to a Git repository 
-# whenever Visual Studio Code is running, checking at a set interval.
-# ================================
-
 # === CONFIGURATION LOADER ===
-# Get the directory where the script is located
-
-# ================================
-# AutoGitPush PowerShell Script (Bash logic)
-# ================================
-
 # Get the directory where the script is located
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
 $CONFIG_FILE = Join-Path $SCRIPT_DIR "..\config\autogitpush.conf"
