@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# ================================
-# AutoGitPush Bash Script
-# -------------------------------
-# This script automatically commits and pushes changes to a Git repository 
-# whenever Visual Studio Code is running, checking at a set interval.
-# ================================
-
 # === CONFIGURATION LOADER ===
 # Get the directory where the script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,34 +9,6 @@ CONFIG_FILE="$SCRIPT_DIR/../config/autogitpush.conf"
 create_default_config() {
     mkdir -p "$(dirname "$CONFIG_FILE")"
     cat > "$CONFIG_FILE" << 'EOF'
-# ================================
-# AutoGitPush Configuration File
-# ================================
-# Edit these values according to your needs
-
-# Path to your local Git repository
-REPO_PATH="$HOME/path/to/your/repo"
-
-# Branch to push changes to
-BRANCH_NAME="main"
-
-# Prefix for commit messages
-COMMIT_MESSAGE_PREFIX="Auto-commit"
-
-# Time between checks - Choose ONE unit and uncomment it
-# Uncomment the line with your preferred time unit and comment out others
-
-# === SECONDS ===
-CHECK_INTERVAL=1800  # 30 minutes in seconds
-
-# === MINUTES ===
-# CHECK_INTERVAL_MINUTES=30  # 30 minutes
-
-# === HOURS ===
-# CHECK_INTERVAL_HOURS=0.5   # 0.5 hours (30 minutes)
-
-# === DAYS ===
-# CHECK_INTERVAL_DAYS=0.02   # 0.02 days (approximately 30 minutes)
 EOF
     echo "📋 Created default configuration file at: $CONFIG_FILE"
     echo "✏️  Please edit the configuration file before running the script."
@@ -119,7 +84,7 @@ echo ""
 # Make sure repo is up to date before starting loop
         
 echo "⬇️ Pulling latest changes from origin/$BRANCH_NAME..."
-git pull origin "$BRANCH_NAME" --no-rebase|| {
+git pull -q origin "$BRANCH_NAME" --no-rebase|| {
     echo "⚠️ Failed to pull latest changes. Check your remote/branch settings."
 }
 
@@ -141,10 +106,10 @@ while true; do
             git add -A
 
             # Commit the staged changes
-            git commit -m "$COMMIT_MESSAGE"
+            git commit -q -m "$COMMIT_MESSAGE"
 
             # Push to the specified branch
-            git push origin "$BRANCH_NAME"
+            git push -q origin "$BRANCH_NAME"
 
             echo "✅ Pushed to $BRANCH_NAME at $TIMESTAMP"
         else
