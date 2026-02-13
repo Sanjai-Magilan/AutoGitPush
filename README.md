@@ -1,3 +1,4 @@
+![Repository Stats](https://github-repo-readme-stats.vercel.app/api/?username=sanjai-magilan&repo=autogitpush&theme=monokai)
 # 🚀 AutoGitPush
 
 AutoGitPush is a lightweight automation tool that **commits and pushes your changes** to a GitHub repository at regular intervals — perfect for developers who want to save work continuously without manual `git add`, `git commit`, and `git push`.
