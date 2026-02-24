@@ -37,9 +37,9 @@ convert_to_seconds() {
     fi
     
     # Minimum interval validation - enforce at least 30 seconds
-    if [[ $interval -lt 5 ]]; then
+    if [[ $interval -lt 1800 ]]; then
         echo "⚠️  Configured interval ($interval seconds) is less than minimum (30 seconds). Using 30 seconds instead."
-        interval=5
+        interval=1800
     fi
     
     CHECK_INTERVAL=$interval
