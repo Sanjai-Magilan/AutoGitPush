@@ -1,22 +1,19 @@
 name: Test AutoGitPush
 
 on:
-  push:
-    branches: [ "main" ]   
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:              
+    permissions:
       contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Git
         run: |
@@ -30,7 +27,7 @@ jobs:
           echo "Initial content" > file.txt
           git add file.txt
           git commit -m "Initial commit"
-          
+
           # 👇 Use GITHUB_TOKEN for authentication
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
           git fetch origin
@@ -79,4 +76,3 @@ jobs:
             echo "❌ Script failed with exit code $EXIT_CODE"
             exit $EXIT_CODE
           fi
-
