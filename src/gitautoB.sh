@@ -32,14 +32,14 @@ convert_to_seconds() {
         interval=$CHECK_INTERVAL
         echo "⏱️  Using interval: $CHECK_INTERVAL seconds"
     else
-        interval=1800  # Default 30 minutes
+        interval=5  # Default 30 minutes
         echo "⚠️  No interval configured, using default: 1800 seconds (30 minutes)"
     fi
     
     # Minimum interval validation - enforce at least 30 seconds
-    if [[ $interval -lt 30 ]]; then
+    if [[ $interval -lt 1800 ]]; then
         echo "⚠️  Configured interval ($interval seconds) is less than minimum (30 seconds). Using 30 seconds instead."
-        interval=30
+        interval=1800
     fi
     
     CHECK_INTERVAL=$interval
